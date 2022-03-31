@@ -1,9 +1,9 @@
 import React from 'react';
-import './Navbar.css';
+import s from './Navbar.module.scss'
 
 const Navbar = () => {
 	return (
-		<nav className="nav">
+		<nav className={s.nav}>
 			<ul>
 				<li><a href="#1">Menu 1</a></li>
 				<li><a href="#2">Menu 2</a></li>

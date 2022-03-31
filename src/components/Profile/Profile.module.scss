@@ -4,35 +4,38 @@
   box-sizing: border-box;
   margin-bottom: 20px;
 }
-.header-content img {
-  height: 200px;
-  width: 100%;
-  object-fit: cover;
-  object-position: center;
-  margin-bottom: 20px;
+.headerContent {
+  img {
+    height: 200px;
+    width: 100%;
+    object-fit: cover;
+    object-position: center;
+    margin-bottom: 20px;
+  }
 }
-.user-content {
+.userContent {
   display: flex;
 }
-.photo-user {
+
+.photoUser {
   margin-right: 20px;
   margin-bottom: 20px;
+  img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 50%;
+    border: 1px solid aliceblue;
+  }
 }
-.photo-user img {
-  width: 80px;
-  height: 80px;
-  object-fit: cover;
-  object-position: center;
-  border-radius: 50%;
-  border: 1px solid aliceblue;
-}
-.posts-block-content {
+.postsBlockContent {
   background-color: #fff;
   padding: 20px;
   box-sizing: border-box;
 }
 
-.posts-content .item {
+.postsContent .item {
   border-bottom: 1px solid aliceblue;
 }
 

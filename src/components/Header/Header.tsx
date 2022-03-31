@@ -1,9 +1,9 @@
 import React from "react";
-import './Header.css';
+import s from './Header.module.scss';
 
-const Header = () => {
+function Header() {
 	return (
-		<header className='header'>
+		<header className={s.header} >
 			<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSaKmCAAbxT1jG-BqJzn8MKOO6u4pfsVJuZFg&usqp=CAU" alt="Logo" />
 		</header>
 	)
