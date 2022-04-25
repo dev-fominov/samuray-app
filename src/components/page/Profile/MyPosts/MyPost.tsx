@@ -6,7 +6,11 @@ const MyPosts = () => {
 	return (
 		<div className={s.postsBlockContent}>
 			<div className={s.myPosts}>
-				My posts
+				<h2>My posts</h2>
+				<div className={s.addMessage}>
+					<textarea></textarea>
+					<button>Add post</button>
+				</div>
 			</div>
 			<div className={s.postsContent}>
 

@@ -1,0 +1,21 @@
+.content {
+	display: flex;
+	background-color: #fff;
+	padding: 20px;
+	box-sizing: border-box;
+}
+
+.dialogs {
+	width: 200px;
+	border-right: 1px solid #000;
+	margin-right: 20px;
+	.dialog {
+		cursor: pointer;
+		&:not(:last-child) {
+			margin-bottom: 10px;
+		}
+		&.active {
+			text-decoration: underline;
+		}
+	}
+}

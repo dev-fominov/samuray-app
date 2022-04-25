@@ -4,3 +4,10 @@
   padding: 20px;
   box-sizing: border-box;
 }
+a {
+  color: #000;
+  text-decoration: none;
+  &.active {
+    color: red;
+  }
+}
