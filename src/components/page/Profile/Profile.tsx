@@ -1,13 +1,14 @@
 import React from "react";
+
+import { PageType } from "../../../App";
 import MyPosts from "./MyPosts/MyPost";
 import ProfileInfo from "./ProfileInfo";
 
-
-const Profile = () => {
+const Profile = (props: PageType) => {
 	return (
 		<>
 			<ProfileInfo/>
-			<MyPosts />
+			<MyPosts posts={props.posts} />
 		</>
 	)
 }

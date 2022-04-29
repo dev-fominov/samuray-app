@@ -1,8 +1,9 @@
 import React from "react";
 import Post from "./Post/Post";
 import s from '../Profile.module.scss';
+import { PageType } from "../../../../App";
 
-const MyPosts = () => {
+const MyPosts = (props: PageType) => {
 	return (
 		<div className={s.postsBlockContent}>
 			<div className={s.myPosts}>
@@ -13,9 +14,7 @@ const MyPosts = () => {
 				</div>
 			</div>
 			<div className={s.postsContent}>
-
-				<Post message="First Message" />
-				<Post message="Second Message" />
+				{props.posts.map(p=><Post id={p.id} message={p.message} likesCount={p.likesCount} />)}
 
 			</div>
 		</div>
