@@ -1,16 +1,7 @@
 import React from "react";
+import { PostType } from "../../../../../Types";
 
 import s from '../../Profile.module.scss';
-
-export type PostType = {
-  id: string
-  message: string
-  likesCount: number
-}
-
-export type PostsType = {
-  posts: PostType[]
-}
 
 function Post(props: PostType) {
 	return (

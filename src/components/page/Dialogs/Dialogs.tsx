@@ -1,21 +1,23 @@
 import React from "react";
-import { PageType } from "../../../App";
-import Dialog, { DialogType } from "./Dialog";
+import { DialogsType } from "../../../Types";
+import Dialog from "./Dialog";
 import s from './Dialogs.module.scss';
-import Message, { MessageType } from "./Message";
+import Message from "./Message";
 
+type DialogDataType = {
+	state: DialogsType
+}
 
-
-function Dialogs(props: PageType) {
+function Dialogs(props: DialogDataType) {
 
 	return (
 		<div className={s.content}>
 			<div className={s.dialogs}>
-				{props.dialogsData.map(dialog => <Dialog name={dialog.name} id={dialog.id} />)}
+				{props.state.dialogsData.map(d => <Dialog name={d.name} id={d.id} />)}
 			</div>
-			{/* <div className={s.messages}>
-				{messagesData.map(message => <Message id={message.id} message={message.message} />)}
-			</div> */}
+			<div className={s.messages}>
+				{props.state.messagesData.map(m => <Message id={m.id} message={m.message} />)}
+			</div>
 		</div>
 	)
 }

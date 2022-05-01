@@ -1,21 +1,43 @@
-import React from "react";
+import React, { ChangeEvent } from "react";
+
 import Post from "./Post/Post";
 import s from '../Profile.module.scss';
-import { PageType } from "../../../../App";
+import { PostType } from "../../../../Types";
+import Button from "../../../Parts/Button/Button";
 
-const MyPosts = (props: PageType) => {
+type MyPostType = {
+	posts: PostType[]
+	newPostText: string
+	addPost: () => void
+	updateNewPost: (newPostText: string) => void
+}
+
+
+
+const MyPosts = (props: MyPostType) => {
+
+	const addPost = () => {
+		props.addPost()
+	}
+
+	const updateNewPostHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
+		props.updateNewPost(e.currentTarget.value)
+	}
+
 	return (
 		<div className={s.postsBlockContent}>
 			<div className={s.myPosts}>
 				<h2>My posts</h2>
 				<div className={s.addMessage}>
-					<textarea></textarea>
-					<button>Add post</button>
+					<textarea
+						onChange={updateNewPostHandler}
+						value={props.newPostText}
+					></textarea>
+					<Button name={'Add post'} callBack={addPost} />
 				</div>
 			</div>
 			<div className={s.postsContent}>
-				{props.posts.map(p=><Post id={p.id} message={p.message} likesCount={p.likesCount} />)}
-
+				{props.posts.map(p => <Post key={p.id} id={p.id} message={p.message} likesCount={p.likesCount} />)}
 			</div>
 		</div>
 	)
