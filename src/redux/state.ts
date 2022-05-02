@@ -1,6 +1,9 @@
-import { renderTree } from './../render';
 import { v1 } from 'uuid';
 import { StateType } from './../Types';
+
+let renderTree = (state: StateType) => {
+	console.log('asdadsdas')
+}
 
 let state: StateType = {
 
@@ -50,3 +53,6 @@ export const updateNewPost = (newPostText: string) => {
 	renderTree(state)
 }
 
+export const subscribe = (observer: (state: StateType) => void) => {
+	renderTree = observer;
+}
