@@ -2,12 +2,13 @@ import React, { ChangeEvent } from "react";
 
 import Post from "./Post/Post";
 import s from '../Profile.module.scss';
-import { PostType } from "../../../../Types";
+import { ActionsTypes, PostType } from "../../../../Types";
 import Button from "../../../Parts/Button/Button";
 
 type MyPostType = {
 	posts: PostType[]
 	newPostText: string
+	dispath: (action: ActionsTypes)=>void
 	addPost: () => void
 	updateNewPost: (newPostText: string) => void
 }
@@ -17,11 +18,13 @@ type MyPostType = {
 const MyPosts = (props: MyPostType) => {
 
 	const addPost = () => {
-		props.addPost()
+		// props.addPost()
+		props.dispath({ type: "ADD-POST", newPostText: props.newPostText })
 	}
 
 	const updateNewPostHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
-		props.updateNewPost(e.currentTarget.value)
+		// props.updateNewPost(e.currentTarget.value)
+		props.dispath({ type: "CHANGE-NEW-TEXT", newPostText: e.currentTarget.value })
 	}
 
 	return (
