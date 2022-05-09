@@ -4,13 +4,12 @@ import Post from "./Post/Post";
 import s from '../Profile.module.scss';
 import { ActionsTypes, PostType } from "../../../../Types";
 import Button from "../../../Parts/Button/Button";
+import { addPostActionCreator, changeNewTextActionCreator } from "../../../../redux/state";
 
 type MyPostType = {
 	posts: PostType[]
 	newPostText: string
 	dispath: (action: ActionsTypes)=>void
-	addPost: () => void
-	updateNewPost: (newPostText: string) => void
 }
 
 
@@ -19,12 +18,12 @@ const MyPosts = (props: MyPostType) => {
 
 	const addPost = () => {
 		// props.addPost()
-		props.dispath({ type: "ADD-POST", newPostText: props.newPostText })
+		props.dispath(addPostActionCreator(props.newPostText))
 	}
 
 	const updateNewPostHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
 		// props.updateNewPost(e.currentTarget.value)
-		props.dispath({ type: "CHANGE-NEW-TEXT", newPostText: e.currentTarget.value })
+		props.dispath(changeNewTextActionCreator(e.currentTarget.value))
 	}
 
 	return (

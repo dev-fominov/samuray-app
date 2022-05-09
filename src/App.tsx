@@ -22,8 +22,8 @@ function App(props: AppStoreType) {
         <div className={s.contentApp}>
           <Navbar />
           <div className={s.rightContent}>
-            <Route path='/dialogs' render={()=> <Dialogs state={state.dialogsPage} />}/>
-            <Route path='/profile' render={()=> <Profile state={state.profilePage} dispath={props.store.dispatch.bind(props.store)} addPost={props.store.addPost.bind(props.store)} updateNewPost={props.store.updateNewPost.bind(props.store)}  />}/>
+            <Route path='/dialogs' render={()=> <Dialogs state={state.dialogsPage} dispath={props.store.dispatch.bind(props.store)} />}/>
+            <Route path='/profile' render={()=> <Profile state={state.profilePage} dispath={props.store.dispatch.bind(props.store)} />}/>
           </div>
         </div>
       </div>

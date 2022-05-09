@@ -7,8 +7,6 @@ import ProfileInfo from "./ProfileInfo";
 type ProfilesType = {
 	state: ProfileType
 	dispath: (action: ActionsTypes)=>void
-	addPost: ()=> void
-	updateNewPost: (newPostText: string)=>void
 }
 
 const Profile = (props: ProfilesType) => {
@@ -19,8 +17,7 @@ const Profile = (props: ProfilesType) => {
 				posts={props.state.posts} 
 				newPostText={props.state.newPostText}
 				dispath={props.dispath.bind(props.state)}
-				addPost={props.addPost} 
-				updateNewPost={props.updateNewPost} />
+				 />
 		</>
 	)
 }

@@ -1,3 +1,5 @@
+import { addMessageActionCreator, addPostActionCreator, changeNewMessageActionCreator, changeNewTextActionCreator } from "./redux/state"
+
 export type StoreType = {
 	_state: StateType
 	updateNewPost: (newPostText: string) => void
@@ -21,6 +23,7 @@ export type ProfileType = {
 export type DialogsType = {
 	dialogsData: DialogsDataType[]
 	messagesData: MessagesDataType[]
+	newMessageText: string
 }
 
 export type PostType = {
@@ -39,13 +42,4 @@ export type MessagesDataType = {
 	message: string
 }
 
-export type AddPostActionType = {
-	type: "ADD-POST"
-	newPostText: string
-}
-export type ChangeNewTextActionType = {
-	type: "CHANGE-NEW-TEXT"
-	newPostText: string
-}
-
-export type ActionsTypes = AddPostActionType | ChangeNewTextActionType
+export type ActionsTypes = ReturnType<typeof addPostActionCreator> | ReturnType<typeof changeNewTextActionCreator> | ReturnType<typeof changeNewMessageActionCreator> | ReturnType<typeof addMessageActionCreator>
