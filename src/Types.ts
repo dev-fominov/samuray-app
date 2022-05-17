@@ -1,4 +1,5 @@
-import { addMessageActionCreator, addPostActionCreator, changeNewMessageActionCreator, changeNewTextActionCreator } from "./redux/state"
+import { addMessageActionCreator, changeNewMessageActionCreator } from "./redux/dialog-reducer"
+import { addPostActionCreator, changeNewTextActionCreator } from "./redux/profile-reducer"
 
 export type StoreType = {
 	_state: StateType

@@ -1,5 +1,5 @@
 import React, { ChangeEvent } from "react";
-import { addMessageActionCreator, changeNewMessageActionCreator } from "../../../redux/state";
+import { addMessageActionCreator, changeNewMessageActionCreator } from "../../../redux/dialog-reducer";
 import { ActionsTypes, DialogsType } from "../../../Types";
 import Button from "../../Parts/Button/Button";
 import Dialog from "./Dialog";
@@ -35,7 +35,7 @@ function Dialogs(props: DialogDataType) {
 						onChange={updateNewMessageHandler}
 						value={props.state.newMessageText}
 					></textarea>
-					<Button name={'Add post'} callBack={addMessage} />
+					<Button name={'Add message'} callBack={addMessage} />
 				</div>
 			</div>
 			</div>
