@@ -24,10 +24,10 @@ function Dialogs(props: DialogDataType) {
 	return (
 		<div className={s.content}>
 			<div className={s.dialogs}>
-				{props.state.dialogsData.map(d => <Dialog name={d.name} id={d.id} />)}
+				{props.state.dialogsData.map(d => <Dialog key={d.id} name={d.name} id={d.id} />)}
 			</div>
 			<div className={s.messages}>
-				{props.state.messagesData.map(m => <Message id={m.id} message={m.message} />)}
+				{props.state.messagesData.map(m => <Message key={m.id} id={m.id} message={m.message} />)}
 				<div className={s.newMessage}>
 				<h2>New message</h2>
 				<div className={s.addMessage}>

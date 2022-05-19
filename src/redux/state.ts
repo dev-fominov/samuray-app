@@ -54,7 +54,7 @@ const store: StoreType = {
 	getState() {
 		return this._state
 	},
-	dispatch(action) {
+	dispatch(action: any) {
 
 		this._state.profilePage = profileReducer(this._state.profilePage, action)
 		this._state.dialogsPage = dialogReducer(this._state.dialogsPage, action)

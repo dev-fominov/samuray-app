@@ -6,11 +6,12 @@ import Header from './components/Header/Header';
 import Navbar from './components/Navbar/Navbar';
 import Dialogs from './components/page/Dialogs/Dialogs';
 import Profile from './components/page/Profile/Profile';
-import { StoreType } from './Types';
+// import { StoreType } from './Types';
 
 
 type AppStoreType = {
-  store: StoreType
+  store: any
+  // store: StoreType
 }
 
 function App(props: AppStoreType) {
