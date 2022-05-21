@@ -1,5 +1,5 @@
-import { addMessageActionCreator, changeNewMessageActionCreator, dialogReducerType } from "./redux/dialog-reducer"
-import { addPostActionCreator, changeNewTextActionCreator, profileReducerType } from "./redux/profile-reducer"
+import { dialogReducerType } from "./redux/dialog-reducer"
+import { profileReducerType } from "./redux/profile-reducer"
 
 export type StoreType = {
 	_state: StateType
@@ -44,4 +44,3 @@ export type MessagesDataType = {
 }
 
 export type ActionsTypes = dialogReducerType | profileReducerType
-// export type ActionsTypes = ReturnType<typeof addPostActionCreator> | ReturnType<typeof changeNewTextActionCreator> | ReturnType<typeof changeNewMessageActionCreator> | ReturnType<typeof addMessageActionCreator>

@@ -2,28 +2,19 @@ import React, { ChangeEvent } from "react";
 
 import Post from "./Post/Post";
 import s from '../Profile.module.scss';
-import { ActionsTypes, PostType } from "../../../../Types";
 import Button from "../../../Parts/Button/Button";
-import { addPostActionCreator, changeNewTextActionCreator } from "../../../../redux/profile-reducer";
+import { MyPostPropsType } from "./MyPostContainer";
 
-type MyPostType = {
-	posts: PostType[]
-	newPostText: string
-	dispath: (action: ActionsTypes)=>void
-}
+const MyPosts = (props: MyPostPropsType) => {
 
+	const postsElements = props.posts.map(p => <Post key={p.id} id={p.id} message={p.message} likesCount={p.likesCount} />)
 
-
-const MyPosts = (props: MyPostType) => {
-
-	const addPost = () => {
-		// props.addPost()
-		props.dispath(addPostActionCreator(props.newPostText))
+	const onAddPost = () => {
+		props.addPost()
 	}
 
-	const updateNewPostHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
-		// props.updateNewPost(e.currentTarget.value)
-		props.dispath(changeNewTextActionCreator(e.currentTarget.value))
+	const onPostChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+		props.updateNewPostText(e.currentTarget.value)
 	}
 
 	return (
@@ -32,14 +23,14 @@ const MyPosts = (props: MyPostType) => {
 				<h2>My posts</h2>
 				<div className={s.addMessage}>
 					<textarea
-						onChange={updateNewPostHandler}
+						onChange={onPostChange}
 						value={props.newPostText}
 					></textarea>
-					<Button name={'Add post'} callBack={addPost} />
+					<Button name={'Add post'} callBack={onAddPost} />
 				</div>
 			</div>
 			<div className={s.postsContent}>
-				{props.posts.map(p => <Post key={p.id} id={p.id} message={p.message} likesCount={p.likesCount} />)}
+				{ postsElements }
 			</div>
 		</div>
 	)

@@ -1,5 +1,10 @@
 import { v1 } from "uuid"
-import { ProfileType } from "../Types"
+
+export type PostType = {
+	id: string
+	message: string
+	likesCount: number
+}
 
 let initialState = {
 	posts: [
@@ -7,21 +12,27 @@ let initialState = {
 		{ id: v1(), message: 'First Message 2', likesCount: 14 },
 		{ id: v1(), message: 'First Message 3', likesCount: 16 },
 		{ id: v1(), message: 'First Message 4', likesCount: 18 }
-	],
-	newPostText: ''
+	] as PostType[],
+	newPostText: '' as string
 }
 
-const profileReducer = (state:ProfileType = initialState, action:profileReducerType) => {
+export type initialStateType = typeof initialState
 
-	switch(action.type) {
+const profileReducer = (state: initialStateType = initialState, action: profileReducerType): initialStateType => {
+
+	switch (action.type) {
 		case 'ADD-POST': {
-			state.posts.push({ id: v1(), message: action.payload.newPostText, likesCount: 0 })
-			state.newPostText = ''
-			return state;
+			return {
+				...state,
+				posts: [...state.posts, { id: v1(), message: state.newPostText, likesCount: 0 }],
+				newPostText: ''
+			}
 		}
 		case 'CHANGE-NEW-TEXT': {
-			state.newPostText = action.payload.newPostText
-			return state;
+			return {
+				...state,
+				newPostText: action.payload.newPostText
+			}
 		}
 		default: return state;
 	}
@@ -30,18 +41,15 @@ const profileReducer = (state:ProfileType = initialState, action:profileReducerT
 export type profileReducerType = addPostActionCreatorType | changeNewTextActionCreatorType
 
 type addPostActionCreatorType = ReturnType<typeof addPostActionCreator>
-export const addPostActionCreator = (newPostText: string) => {
-	return  { 
-		type: 'ADD-POST', 
-		payload: {newPostText} 
-	} as const
+export const addPostActionCreator = () => {
+	return { type: 'ADD-POST' } as const
 }
 
 type changeNewTextActionCreatorType = ReturnType<typeof changeNewTextActionCreator>
 export const changeNewTextActionCreator = (newPostText: string) => {
-	return { 
-		type: 'CHANGE-NEW-TEXT', 
-		payload: {newPostText} 
+	return {
+		type: 'CHANGE-NEW-TEXT',
+		payload: { newPostText }
 	} as const
 }
 

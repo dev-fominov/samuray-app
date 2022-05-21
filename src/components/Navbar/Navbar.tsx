@@ -1,7 +1,5 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import Dialogs from '../page/Dialogs/Dialogs';
-import Profile from '../page/Profile/Profile';
 import s from './Navbar.module.scss'
 
 const Navbar = () => {
@@ -13,6 +11,9 @@ const Navbar = () => {
 				</li>
 				<li>
 					<NavLink to="/profile" activeClassName={s.active} >Profile</NavLink>
+				</li>
+				<li>
+					<NavLink to="/users" activeClassName={s.active} >Users</NavLink>
 				</li>
 			</ul>
 		</nav>

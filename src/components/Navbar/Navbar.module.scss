@@ -3,11 +3,32 @@
   background-color: #fff;
   padding: 20px;
   box-sizing: border-box;
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    li {
+      &:not(:last-child) {
+        margin-bottom: 10px;
+      }
+    }
+  }
 }
 a {
   color: #000;
   text-decoration: none;
+  position: relative;
   &.active {
     color: red;
+    &:before {
+      content:'';
+      width: 3px;
+      height: 3px;
+      border-radius: 50%;
+      background-color: red;
+      position: absolute;
+      top: 10px;
+      left: -10px;
+    }
   }
 }

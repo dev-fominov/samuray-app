@@ -1,23 +1,13 @@
 import React from "react";
-import { ActionsTypes, ProfileType } from "../../../Types";
 
-import MyPosts from "./MyPosts/MyPost";
+import {MyPostsContainer} from "./MyPosts/MyPostContainer";
 import ProfileInfo from "./ProfileInfo";
 
-type ProfilesType = {
-	state: ProfileType
-	dispath: (action: ActionsTypes)=>void
-}
-
-const Profile = (props: ProfilesType) => {
+const Profile = () => {
 	return (
 		<>
 			<ProfileInfo />
-			<MyPosts 
-				posts={props.state.posts} 
-				newPostText={props.state.newPostText}
-				dispath={props.dispath.bind(props.state)}
-				 />
+			<MyPostsContainer />
 		</>
 	)
 }

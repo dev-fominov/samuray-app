@@ -1,41 +1,35 @@
 import React, { ChangeEvent } from "react";
-import { addMessageActionCreator, changeNewMessageActionCreator } from "../../../redux/dialog-reducer";
-import { ActionsTypes, DialogsType } from "../../../Types";
 import Button from "../../Parts/Button/Button";
 import Dialog from "./Dialog";
 import s from './Dialogs.module.scss';
+import { DialogPropsType } from "./DialogsContainer";
 import Message from "./Message";
 
-type DialogDataType = {
-	state: DialogsType
-	dispath: (action: ActionsTypes)=>void
-}
+function Dialogs(props: DialogPropsType) {
 
-function Dialogs(props: DialogDataType) {
-
-	const addMessage = () => {
-		props.dispath(addMessageActionCreator(props.state.newMessageText))
+	const onAddMessage = () => {
+		props.addMessage()
 	}
 
-	const updateNewMessageHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
-		props.dispath(changeNewMessageActionCreator(e.currentTarget.value))
+	const onNewMessageChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+		props.updateNewMessageBody(e.currentTarget.value)
 	}
 
 	return (
 		<div className={s.content}>
 			<div className={s.dialogs}>
-				{props.state.dialogsData.map(d => <Dialog key={d.id} name={d.name} id={d.id} />)}
+				{props.dialogsPage.dialogsData.map(d => <Dialog key={d.id} name={d.name} id={d.id} />)}
 			</div>
 			<div className={s.messages}>
-				{props.state.messagesData.map(m => <Message key={m.id} id={m.id} message={m.message} />)}
+				{props.dialogsPage.messagesData.map(m => <Message key={m.id} id={m.id} message={m.message} />)}
 				<div className={s.newMessage}>
 				<h2>New message</h2>
 				<div className={s.addMessage}>
 					<textarea
-						onChange={updateNewMessageHandler}
-						value={props.state.newMessageText}
+						onChange={onNewMessageChange}
+						value={props.dialogsPage.newMessageText}
 					></textarea>
-					<Button name={'Add message'} callBack={addMessage} />
+					<Button name={'Add message'} callBack={onAddMessage} />
 				</div>
 			</div>
 			</div>

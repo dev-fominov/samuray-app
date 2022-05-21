@@ -1,34 +1,27 @@
 import React from 'react';
 
-import { BrowserRouter, Route } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 import s from './App.module.scss';
 import Header from './components/Header/Header';
 import Navbar from './components/Navbar/Navbar';
-import Dialogs from './components/page/Dialogs/Dialogs';
+import DialogsContainer from './components/page/Dialogs/DialogsContainer';
 import Profile from './components/page/Profile/Profile';
-// import { StoreType } from './Types';
+import UsersContainer from './components/page/Users/UsersContainer';
 
+function App() {
 
-type AppStoreType = {
-  store: any
-  // store: StoreType
-}
-
-function App(props: AppStoreType) {
-  const state = props.store.getState()
   return (
-    <BrowserRouter>
-      <div className={s.App}>
-        <Header />
-        <div className={s.contentApp}>
-          <Navbar />
-          <div className={s.rightContent}>
-            <Route path='/dialogs' render={()=> <Dialogs state={state.dialogsPage} dispath={props.store.dispatch.bind(props.store)} />}/>
-            <Route path='/profile' render={()=> <Profile state={state.profilePage} dispath={props.store.dispatch.bind(props.store)} />}/>
-          </div>
+    <div className={s.App}>
+      <Header />
+      <div className={s.contentApp}>
+        <Navbar />
+        <div className={s.rightContent}>
+          <Route path='/dialogs' render={() => <DialogsContainer />} />
+          <Route path='/profile' render={() => <Profile />} />
+          <Route path='/users' render={() => <UsersContainer />} />
         </div>
       </div>
-    </BrowserRouter>
+    </div>
   );
 }
 
