@@ -1,26 +1,24 @@
-import { v1 } from "uuid"
+
 
 export type UsersDataType = {
 	id: string
-	photoURL: string
+	photos: PhotosType
 	followed: boolean
-	fullName: string
+	name: string
 	status: string
-	location: LocationType
+	// location: LocationType
 }
-
-type LocationType = {
-	city: string
-	country: string
+type PhotosType = {
+	small: string
+	large: string
 }
+// type LocationType = {
+// 	city: string
+// 	country: string
+// }
 
 let initialState = {
-	usersData: [
-		{ id: v1(), photoURL: 'https://www.ranacanada.ca/wp-content/uploads/2021/05/user.png', followed: false, fullName: 'Dmitriy', status: 'I am a Boss', location: { city: 'Minsk', country: 'Belarus' } },
-		{ id: v1(), photoURL: 'https://www.ranacanada.ca/wp-content/uploads/2021/05/user.png', followed: true, fullName: 'Dmitriy', status: 'I am a Status', location: { city: 'Grodno', country: 'Belarus' } },
-		{ id: v1(), photoURL: 'https://www.ranacanada.ca/wp-content/uploads/2021/05/user.png', followed: true, fullName: 'Dmitriy', status: 'I am a No Status', location: { city: 'Gomel', country: 'Belarus' } },
-		{ id: v1(), photoURL: 'https://www.ranacanada.ca/wp-content/uploads/2021/05/user.png', followed: false, fullName: 'Dmitriy', status: 'I am a Boss Too', location: { city: 'Vitebsk', country: 'Belarus' } },
-	] as UsersDataType[]
+	usersData: [] as UsersDataType[]
 }
 
 export type initialStateType = typeof initialState
