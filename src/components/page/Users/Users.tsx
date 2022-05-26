@@ -1,34 +1,35 @@
 import React from "react";
 import { UsersPropsType } from "./UsersContainer";
 import s from './Users.module.scss';
-import { UsersDataType } from "../../../redux/users-reducer";
-// import * as axios from 'axios';
-const axios = require('axios').default;
+// import { UsersDataType } from "../../../redux/users-reducer";
+// // import * as axios from 'axios';
+// const axios = require('axios').default;
 
-const photoURL = 'https://img.icons8.com/bubbles/50/000000/user.png'
+// const photoURL = 'https://img.icons8.com/bubbles/50/000000/user.png'
 
-type ResponseType = {
-	data: DataType
-}
+// type ResponseType = {
+// 	data: DataType
+// }
 
-type DataType = {
-	items: UsersDataType[]
-}
+// type DataType = {
+// 	items: UsersDataType[]
+// }
 
 function Users(props: UsersPropsType) {
 
-	if (props.usersPage.usersData.length === 0) {
+	// if (props.usersPage.usersData.length === 0) {
 
-		axios
-			.get("https://social-network.samuraijs.com/api/1.0/users")
-			.then((response:ResponseType) => {
-				props.setUsers(response.data.items)
-			})
-	}
+	// 	axios
+	// 		.get("https://social-network.samuraijs.com/api/1.0/users")
+	// 		.then((response:ResponseType) => {
+	// 			props.setUsers(response.data.items)
+	// 		})
+			
+	// }
 
 	return (
 		<div className={s.content}>
-			<div className={s.titlePage}>Users</div>
+			{/* <div className={s.titlePage}>Users</div>
 			{props.usersPage.usersData.map(u => {
 				return (
 					<div key={u.id} className={s.userInfo}>
@@ -54,7 +55,7 @@ function Users(props: UsersPropsType) {
 						</div>
 					</div>
 				)
-			})}
+			})} */}
 		</div>
 	)
 }

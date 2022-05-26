@@ -1,21 +1,16 @@
 
 
 export type UsersDataType = {
-	id: string
-	photos: PhotosType
-	followed: boolean
-	name: string
-	status: string
-	// location: LocationType
+	id?: string
+	photos?: PhotosType
+	followed?: boolean
+	name?: string
+	status?: string
 }
 type PhotosType = {
-	small: string
-	large: string
+	small?: string
+	large?: string
 }
-// type LocationType = {
-// 	city: string
-// 	country: string
-// }
 
 let initialState = {
 	usersData: [] as UsersDataType[]

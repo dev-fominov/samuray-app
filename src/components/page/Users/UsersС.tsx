@@ -2,53 +2,41 @@ import React from "react";
 import { UsersPropsType } from "./UsersContainer";
 import s from './Users.module.scss';
 import { UsersDataType } from "../../../redux/users-reducer";
-// import * as axios from 'axios';
-const axios = require('axios').default;
+import * as axios from 'axios';
+// const axios = require('axios').default;
 
 const photoURL = 'https://img.icons8.com/bubbles/50/000000/user.png'
 
 type ResponseType = {
-	data: DataType
+	data?: DataType
 }
 
 type DataType = {
-	items: UsersDataType[]
+	items?: UsersDataType[]
 }
 
 class Users extends React.Component {
 
-	constructor(props: UsersPropsType) {
-		super(props);
+	componentDidMount() {
 		axios
-		.get("https://social-network.samuraijs.com/api/1.0/users")
-		.then((response:ResponseType) => {
-			this.props.setUsers(response.data.items)
-		})
+			.get("https://social-network.samuraijs.com/api/1.0/users")
+			.then((response: ResponseType) => {
+				this.props.setUsers(response.data.items)
+			})
 	}
-
-	// getUsers = () => {
-	// 	if (this.props.usersPage.usersData.length === 0) {
-
-	// 		axios
-	// 			.get("https://social-network.samuraijs.com/api/1.0/users")
-	// 			.then((response:ResponseType) => {
-	// 				this.props.setUsers(response.data.items)
-	// 			})
-	// 	}
-	// }
 
 	render() {
 		return (
-			
+
 			<div className={s.content}>
-				
 				<div className={s.titlePage}>Users</div>
-				{this.props.usersPage.usersData.map(u => {
+				{/* {console.log(this.props)} */}
+				{this.props.usersPage.usersData.map((u:any) => {
 					return (
 						<div key={u.id} className={s.userInfo}>
 							<div className={s.left}>
 								<div className={s.img}>
-									<img src={ u.photos.small != null ? u.photos.small : photoURL} alt="User" />
+									<img src={u.photos.small != null ? u.photos.small : photoURL} alt="User" />
 								</div>
 								<div className={s.followed}>
 									{u.followed
@@ -64,7 +52,7 @@ class Users extends React.Component {
 									<span className={s.country}>{"u.location.country"},</span>
 									<span className={s.city}>{"u.location.city"}</span>
 								</div>
-	
+
 							</div>
 						</div>
 					)
