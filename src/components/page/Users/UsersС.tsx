@@ -2,8 +2,8 @@ import React from "react";
 import { UsersPropsType } from "./UsersContainer";
 import s from './Users.module.scss';
 import { UsersDataType } from "../../../redux/users-reducer";
-import * as axios from 'axios';
-// const axios = require('axios').default;
+// import * as axios from 'axios';
+const axios = require('axios').default;
 
 const photoURL = 'https://img.icons8.com/bubbles/50/000000/user.png'
 
@@ -15,13 +15,19 @@ type DataType = {
 	items?: UsersDataType[]
 }
 
-class Users extends React.Component {
+
+
+class Users extends React.Component<any, any> {
+	
+	// constructor(props:any) {
+  //   super(props)
+  // }
 
 	componentDidMount() {
 		axios
 			.get("https://social-network.samuraijs.com/api/1.0/users")
 			.then((response: ResponseType) => {
-				this.props.setUsers(response.data.items)
+				this.props.setUsers(response.data?.items)
 			})
 	}
 
@@ -30,7 +36,7 @@ class Users extends React.Component {
 
 			<div className={s.content}>
 				<div className={s.titlePage}>Users</div>
-				{/* {console.log(this.props)} */}
+				{console.log(this.props)}
 				{this.props.usersPage.usersData.map((u:any) => {
 					return (
 						<div key={u.id} className={s.userInfo}>
