@@ -14,9 +14,9 @@ type PhotosType = {
 
 let initialState = {
 	usersData: [] as UsersDataType[],
-	pageSize: 100,
-	totalUsersCount: 0,
-	currentPage: 1
+	pageSize: 10 as number,
+	totalUsersCount: 0 as number,
+	currentPage: 1 as number,
 
 }
 

@@ -1,41 +1,38 @@
 import React from "react";
 import { UsersPropsType } from "./UsersContainer";
 import s from './Users.module.scss';
-// import { UsersDataType } from "../../../redux/users-reducer";
-// // import * as axios from 'axios';
-// const axios = require('axios').default;
 
-// const photoURL = 'https://img.icons8.com/bubbles/50/000000/user.png'
+const photoURL = 'https://img.icons8.com/bubbles/50/000000/user.png'
 
-// type ResponseType = {
-// 	data: DataType
-// }
+type UsersType = UsersPropsType & { onPageChanged: (p: number) => void }
 
-// type DataType = {
-// 	items: UsersDataType[]
-// }
+function Users(props: UsersType) {
 
-function Users2(props: UsersPropsType) {
-
-	// if (props.usersPage.usersData.length === 0) {
-
-	// 	axios
-	// 		.get("https://social-network.samuraijs.com/api/1.0/users")
-	// 		.then((response:ResponseType) => {
-	// 			props.setUsers(response.data.items)
-	// 		})
-			
-	// }
+	let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize)
+	let pages = []
+	for (let i = 1; i <= pagesCount; i++) {
+		pages.push(i)
+	}
 
 	return (
 		<div className={s.content}>
-			{/* <div className={s.titlePage}>Users</div>
-			{props.usersPage.usersData.map(u => {
+			<div className={s.titlePage}>Users</div>
+			<div>
+				{pages.map(p => {
+					return <span
+						key={p}
+						className={props.currentPage === p ? s.active : ''}
+						onClick={(e) => props.onPageChanged(p)}
+					>{p}</span>
+				})}
+			</div>
+			{/* {console.log(props)} */}
+			{props.usersData.map((u: any) => {
 				return (
 					<div key={u.id} className={s.userInfo}>
 						<div className={s.left}>
 							<div className={s.img}>
-								<img src={ u.photos.small != null ? u.photos.small : photoURL} alt="User" />
+								<img src={u.photos.small != null ? u.photos.small : photoURL} alt="User" />
 							</div>
 							<div className={s.followed}>
 								{u.followed
@@ -55,9 +52,9 @@ function Users2(props: UsersPropsType) {
 						</div>
 					</div>
 				)
-			})} */}
+			})}
 		</div>
 	)
 }
 
-export default Users2
+export default Users
