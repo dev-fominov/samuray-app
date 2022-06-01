@@ -13,7 +13,11 @@ type PhotosType = {
 }
 
 let initialState = {
-	usersData: [] as UsersDataType[]
+	usersData: [] as UsersDataType[],
+	pageSize: 100,
+	totalUsersCount: 0,
+	currentPage: 1
+
 }
 
 export type initialStateType = typeof initialState
@@ -44,14 +48,20 @@ const usersReducer = (state: initialStateType = initialState, action: usersReduc
 			}
 		}
 		case 'SET_USERS': {
-			return { ...state, usersData: [...state.usersData, ...action.payload.usersData] }
+			return { ...state, usersData: action.payload.usersData }
+		}
+		case 'SET_CURRENT_PAGE': {
+			return { ...state, currentPage: action.payload.currentPage }
+		}
+		case 'SET_TOTAL_USERS_COUNT': {
+			return { ...state, totalUsersCount:action.payload.totalCount	  }
 		}
 		default: return state;
 	}
 
 }
 
-export type usersReducerType = followACType | unfollowACType | usersDataACType
+export type usersReducerType = followACType | unfollowACType | usersDataACType | setCurrentPageACType | setTotalUsersCountACType
 
 type followACType = ReturnType<typeof followAC>
 export const followAC = (userID: string) => {
@@ -74,6 +84,22 @@ export const usersDataAC = (usersData: UsersDataType[]) => {
 	return {
 		type: 'SET_USERS',
 		payload: { usersData }
+	} as const
+}
+
+type setCurrentPageACType = ReturnType<typeof setCurrentPageAC>
+export const setCurrentPageAC = (currentPage: number) => {
+	return {
+		type: 'SET_CURRENT_PAGE',
+		payload: { currentPage }
+	} as const
+}
+
+type setTotalUsersCountACType = ReturnType<typeof setTotalUsersCountAC>
+export const setTotalUsersCountAC = (totalCount: number) => {
+	return {
+		type: 'SET_TOTAL_USERS_COUNT',
+		payload: { totalCount }
 	} as const
 }
 

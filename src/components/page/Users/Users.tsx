@@ -15,7 +15,7 @@ import s from './Users.module.scss';
 // 	items: UsersDataType[]
 // }
 
-function Users(props: UsersPropsType) {
+function Users2(props: UsersPropsType) {
 
 	// if (props.usersPage.usersData.length === 0) {
 
@@ -60,4 +60,4 @@ function Users(props: UsersPropsType) {
 	)
 }
 
-export default Users
+export default Users2
