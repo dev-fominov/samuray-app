@@ -1,11 +1,20 @@
 import React from "react";
+import Preloader from "../../command/Preloader";
 import s from './Profile.module.scss';
+import { ProfileType } from "./ProfileContainer";
 
-function ProfileInfo() {
+type ProfileInfoType = {
+	profile: ProfileType
+}
+
+function ProfileInfo(props: ProfileInfoType) {
+	if (!props.profile) {
+		return <Preloader />
+	}
 	return (
 		<div className={s.content}>
 			<div className={s.headerContent}>
-				<img src="https://media-cdn.tripadvisor.com/media/photo-s/15/a4/9b/77/legacy-hotel-at-img-academy.jpg" alt="Background" />
+				<img src={props.profile?.photos?.large} alt="Background" />
 			</div>
 			<div className={s.userContent}>
 				<div className={s.photoUser}>

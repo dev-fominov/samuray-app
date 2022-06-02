@@ -1,4 +1,5 @@
 import { v1 } from "uuid"
+import { ProfileType } from "../components/page/Profile/ProfileContainer"
 
 export type PostType = {
 	id: string
@@ -13,7 +14,8 @@ let initialState = {
 		{ id: v1(), message: 'First Message 3', likesCount: 16 },
 		{ id: v1(), message: 'First Message 4', likesCount: 18 }
 	] as PostType[],
-	newPostText: '' as string
+	newPostText: '',
+	profile: null as any
 }
 
 export type initialStateType = typeof initialState
@@ -34,11 +36,14 @@ const profileReducer = (state: initialStateType = initialState, action: profileR
 				newPostText: action.payload.newPostText
 			}
 		}
+		case 'SET-USER-PROFILE': {
+			return {...state, profile: action.payload.profile}
+		}
 		default: return state;
 	}
 }
 
-export type profileReducerType = addPostActionCreatorType | changeNewTextActionCreatorType
+export type profileReducerType = addPostActionCreatorType | changeNewTextActionCreatorType | setUserProfileType
 
 type addPostActionCreatorType = ReturnType<typeof addPostActionCreator>
 export const addPostActionCreator = () => {
@@ -50,6 +55,13 @@ export const changeNewTextActionCreator = (newPostText: string) => {
 	return {
 		type: 'CHANGE-NEW-TEXT',
 		payload: { newPostText }
+	} as const
+}
+type setUserProfileType = ReturnType<typeof setUserProfile>
+export const setUserProfile = (profile: ProfileType) => {
+	return {
+		type: 'SET-USER-PROFILE',
+		payload: { profile }
 	} as const
 }
 

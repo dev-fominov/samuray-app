@@ -17,7 +17,7 @@ let initialState = {
 	pageSize: 10 as number,
 	totalUsersCount: 0 as number,
 	currentPage: 1 as number,
-
+	isFetching: false as boolean
 }
 
 export type initialStateType = typeof initialState
@@ -54,52 +54,63 @@ const usersReducer = (state: initialStateType = initialState, action: usersReduc
 			return { ...state, currentPage: action.payload.currentPage }
 		}
 		case 'SET_TOTAL_USERS_COUNT': {
-			return { ...state, totalUsersCount:action.payload.totalCount	  }
+			return { ...state, totalUsersCount: action.payload.totalCount }
+		}
+		case 'TOGGLE_IS_FETCHING': {
+			return { ...state, isFetching: action.payload.isFetching }
 		}
 		default: return state;
 	}
 
 }
 
-export type usersReducerType = followACType | unfollowACType | usersDataACType | setCurrentPageACType | setTotalUsersCountACType
+export type usersReducerType = followACType | unfollowACType | usersDataACType | setCurrentPageACType | setTotalUsersCountACType | toggleIsFetchingACType
 
-type followACType = ReturnType<typeof followAC>
-export const followAC = (userID: string) => {
+type followACType = ReturnType<typeof follow>
+export const follow = (userID: string) => {
 	return {
 		type: 'FOLLOW',
 		payload: { userID }
 	} as const
 }
 
-type unfollowACType = ReturnType<typeof unfollowAC>
-export const unfollowAC = (userID: string) => {
+type unfollowACType = ReturnType<typeof unfollow>
+export const unfollow = (userID: string) => {
 	return {
 		type: 'UNFOLLOW',
 		payload: { userID }
 	} as const
 }
 
-type usersDataACType = ReturnType<typeof usersDataAC>
-export const usersDataAC = (usersData: UsersDataType[]) => {
+type usersDataACType = ReturnType<typeof setUsers>
+export const setUsers = (usersData: UsersDataType[]) => {
 	return {
 		type: 'SET_USERS',
 		payload: { usersData }
 	} as const
 }
 
-type setCurrentPageACType = ReturnType<typeof setCurrentPageAC>
-export const setCurrentPageAC = (currentPage: number) => {
+type setCurrentPageACType = ReturnType<typeof setCurrentPage>
+export const setCurrentPage = (currentPage: number) => {
 	return {
 		type: 'SET_CURRENT_PAGE',
 		payload: { currentPage }
 	} as const
 }
 
-type setTotalUsersCountACType = ReturnType<typeof setTotalUsersCountAC>
-export const setTotalUsersCountAC = (totalCount: number) => {
+type setTotalUsersCountACType = ReturnType<typeof setTotalUsersCount>
+export const setTotalUsersCount = (totalCount: number) => {
 	return {
 		type: 'SET_TOTAL_USERS_COUNT',
 		payload: { totalCount }
+	} as const
+}
+
+type toggleIsFetchingACType = ReturnType<typeof toggleIsFetching>
+export const toggleIsFetching = (isFetching: boolean) => {
+	return {
+		type: 'TOGGLE_IS_FETCHING',
+		payload: { isFetching }
 	} as const
 }
 

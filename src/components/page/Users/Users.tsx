@@ -1,10 +1,20 @@
 import React from "react";
-import { UsersPropsType } from "./UsersContainer";
 import s from './Users.module.scss';
-
+import { UsersDataType } from "../../../redux/users-reducer";
+import { NavLink } from "react-router-dom";
+ 
 const photoURL = 'https://img.icons8.com/bubbles/50/000000/user.png'
 
-type UsersType = UsersPropsType & { onPageChanged: (p: number) => void }
+type UsersType = {
+	totalUsersCount: number
+	pageSize: number
+	currentPage: number
+	usersData: UsersDataType[]
+	onPageChanged: (pageNumber: number) => void
+	follow: (userID: string) => void
+	unfollow: (userID: string) => void
+	isFetching: boolean
+}
 
 function Users(props: UsersType) {
 
@@ -26,13 +36,15 @@ function Users(props: UsersType) {
 					>{p}</span>
 				})}
 			</div>
-			{/* {console.log(props)} */}
 			{props.usersData.map((u: any) => {
 				return (
 					<div key={u.id} className={s.userInfo}>
 						<div className={s.left}>
 							<div className={s.img}>
-								<img src={u.photos.small != null ? u.photos.small : photoURL} alt="User" />
+								<NavLink to={'/profile/' + u.id} >
+									<img src={u.photos.small != null ? u.photos.small : photoURL} alt="User" />
+								</NavLink>
+								
 							</div>
 							<div className={s.followed}>
 								{u.followed

@@ -5,7 +5,7 @@ import s from './App.module.scss';
 import Header from './components/Header/Header';
 import Navbar from './components/Navbar/Navbar';
 import DialogsContainer from './components/page/Dialogs/DialogsContainer';
-import Profile from './components/page/Profile/Profile';
+import ProfileContainer from './components/page/Profile/ProfileContainer';
 import UsersContainer from './components/page/Users/UsersContainer';
 
 function App() {
@@ -17,7 +17,7 @@ function App() {
         <Navbar />
         <div className={s.rightContent}>
           <Route path='/dialogs' render={() => <DialogsContainer />} />
-          <Route path='/profile' render={() => <Profile />} />
+          <Route path='/profile' render={() => <ProfileContainer />} />
           <Route path='/users' render={() => <UsersContainer />} />
         </div>
       </div>
