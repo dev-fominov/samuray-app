@@ -5,7 +5,7 @@ import { ProfileType } from "./ProfileContainer";
 import ProfileInfo from "./ProfileInfo";
 
 type PropsProfileType = {
-	profile: ProfileType
+	profile: ProfileType | null
 }
 
 const Profile = (props: PropsProfileType) => {

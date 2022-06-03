@@ -4,7 +4,7 @@ import s from './Profile.module.scss';
 import { ProfileType } from "./ProfileContainer";
 
 type ProfileInfoType = {
-	profile: ProfileType
+	profile: ProfileType | null
 }
 
 function ProfileInfo(props: ProfileInfoType) {
@@ -12,16 +12,19 @@ function ProfileInfo(props: ProfileInfoType) {
 		return <Preloader />
 	}
 	return (
-		<div className={s.content}>
+
+	<div>
+			{ props.profile && <div className={s.content}>
 			<div className={s.headerContent}>
-				<img src={props.profile?.photos?.large} alt="Background" />
+				<img src={props.profile.photos.large} alt="Background" />
 			</div>
 			<div className={s.userContent}>
 				<div className={s.photoUser}>
-					<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQsWfY8lPOjrVhShtfBF5GZyf_CYKPvt4OHEbIgSNfQudHS4ZebueQItGZ1XZrnA6H2mpU&usqp=CAU" alt="User" />
+					<img src={props.profile.photos.large} alt="User" />
 				</div>
 				<div className={s.infoUser}>
-					<div className={s.name}>Dmitriy</div>
+					<div className={s.name}>{props.profile.fullName}</div>
+					<div>{props.profile.aboutMe}</div>
 					<ul>
 						<li><span>Date of birsday: </span><span>2 january</span></li>
 						<li><span>City: </span><span>Minsk</span></li>
@@ -30,7 +33,10 @@ function ProfileInfo(props: ProfileInfoType) {
 					</ul>
 				</div>
 			</div>
-		</div>
+		</div>}
+	</div>
+
+	
 	)
 }
 

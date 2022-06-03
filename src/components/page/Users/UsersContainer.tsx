@@ -4,8 +4,7 @@ import { follow, setCurrentPage, setTotalUsersCount, toggleIsFetching, unfollow,
 import { AppStateType } from "../../../redux/redux-store";
 import Users from "./Users";
 import Preloader from "../../command/Preloader";
-
-const axios = require('axios').default;
+import axios from 'axios'
 
 type ResponseType = {
 	data: DataType
