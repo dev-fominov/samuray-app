@@ -2,7 +2,8 @@ import React from "react";
 import s from './Users.module.scss';
 import { UsersDataType } from "../../../redux/users-reducer";
 import { NavLink } from "react-router-dom";
- 
+import axios from "axios";
+
 const photoURL = 'https://img.icons8.com/bubbles/50/000000/user.png'
 
 type UsersType = {
@@ -44,12 +45,37 @@ function Users(props: UsersType) {
 								<NavLink to={'/profile/' + u.id} >
 									<img src={u.photos.small != null ? u.photos.small : photoURL} alt="User" />
 								</NavLink>
-								
+
 							</div>
 							<div className={s.followed}>
 								{u.followed
-									? <button onClick={() => props.unfollow(u.id)}>Unfollow</button>
-									: <button onClick={() => props.follow(u.id)}>Follow</button>
+									? <button onClick={() => {
+										axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {
+											withCredentials: true,                                                                                                                                                     
+											headers: {
+												"API-KEY": '1449fb6f-a118-46bc-8b11-af0716488d9c'
+											}
+										})
+											.then((response: any) => {
+												if (response.data.resultCode === 0) {
+													props.unfollow(u.id)
+												}
+											})
+										
+									}}>Unfollow</button>
+									: <button onClick={() => {
+										axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {}, {
+											withCredentials: true,
+											headers: {
+												"API-KEY": '1449fb6f-a118-46bc-8b11-af0716488d9c'
+											}
+										})
+											.then((response: any) => {
+												if (response.data.resultCode === 0) {
+													props.follow(u.id)
+												}
+											})
+									}}>Follow</button>
 								}
 							</div>
 						</div>
