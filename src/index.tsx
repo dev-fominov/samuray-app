@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { store } from './reducer/store';
 import ReactDOM from 'react-dom';
 import './index.css';

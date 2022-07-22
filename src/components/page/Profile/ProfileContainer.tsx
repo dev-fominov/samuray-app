@@ -1,67 +1,29 @@
-import React from "react";
-import { connect } from "react-redux";
-import { AppStateType } from "../../../reducer/store";
-import Profile from "./Profile";
-import { setUserProfile } from '../../../reducer/profile-reducer';
-import axios from 'axios'
-import { RouteComponentProps, withRouter } from "react-router-dom";
+import React, { ComponentType } from "react";
+import { connect } from "react-redux"
+import { AppStateType } from "../../../reducer/store"
+import Profile from "./Profile"
+import { getProfileTC, getStatusTC } from '../../../reducer/profile-reducer'
+import { useParams } from "react-router-dom"
+import { ProfileType } from "../../../api/api"
+import { withAuthRedirect } from "../../../hoc/withAuthRedirect"
+import { compose } from "redux";
 
-
-type ResponseType = {
-	data: ProfileType
+const withRouter = (WrappedComponent: ComponentType) => (props: any) => {
+	const params = useParams()
+	return (
+		<WrappedComponent
+			{...props}
+			params={params}
+		/>
+	)
 }
-
-export type ProfileType = {
-	aboutMe: string
-	contacts: ContactsType
-	lookingForAJob: boolean
-	lookingForAJobDescription: string
-	fullName: string
-	userId: number
-	photos: PhotosType
-}
-
-export type ContactsType = {
-	facebook: string
-	website: string | null
-	vk: string
-	twitter: string
-	instagram: string
-	youtube: string | null
-	github: string
-	mainLink: string | null
-}
-
-export type PhotosType = {
-	small: string
-	large: string
-}
-
-export type mapStateToPropsType = {
-	profile: ProfileType | null
-}
-
-export type mapDispatchToPropsType = {
-	setUserProfile: (profile: ProfileType) => void
-}
-
-type PathParamsType = {
-	userId: string
-}
-
-export type OldProfilePropsType = mapStateToPropsType & mapDispatchToPropsType
-
-type ProfilePropsType = RouteComponentProps<PathParamsType> & OldProfilePropsType
 
 class ProfileContainer extends React.Component<ProfilePropsType, AppStateType> {
 
 	componentDidMount() {
-		let userId = this.props.match.params.userId
-		axios
-			.get(`https://social-network.samuraijs.com/api/1.0/profile/` + userId)
-			.then((response: ResponseType) => {
-				this.props.setUserProfile(response.data);
-			})
+		let userId = this.props.params['*'] ? this.props.params['*'] : '24113'
+		this.props.getProfileTC(userId)
+		this.props.getStatusTC(userId)
 	}
 
 	render() {
@@ -71,12 +33,26 @@ class ProfileContainer extends React.Component<ProfilePropsType, AppStateType> {
 	}
 }
 
-const mapStateToProps = (state: AppStateType): mapStateToPropsType => {
-	return {
-		profile: state.profilePage.profile
-	}
+const mapStateToProps = (state: AppStateType): mapStateToPropsType =>
+	({ profile: state.profilePage.profile })
+
+export default compose<ComponentType>(
+	connect(mapStateToProps, { getProfileTC, getStatusTC }),
+	withRouter,
+	withAuthRedirect
+)(ProfileContainer)
+
+
+// TYPES
+export type mapStateToPropsType = {
+	profile: ProfileType | null
 }
 
-let WithRouterProfileContainer = withRouter(ProfileContainer)
+export type mapDispatchToPropsType = {
+	getProfileTC: (userId: string) => void
+	getStatusTC: (userId: string) => void
+}
 
-export default connect(mapStateToProps, {setUserProfile})(WithRouterProfileContainer);
+export type OldProfilePropsType = mapStateToPropsType & mapDispatchToPropsType
+
+type ProfilePropsType = any

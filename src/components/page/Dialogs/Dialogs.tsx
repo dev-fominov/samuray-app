@@ -1,19 +1,15 @@
-import React, { ChangeEvent } from "react";
-import Button from "../../Parts/Button/Button";
-import Dialog from "./Dialog";
-import s from './Dialogs.module.scss';
-import { DialogPropsType } from "./DialogsContainer";
-import Message from "./Message";
+import { ChangeEvent } from "react"
+import Button from "../../Parts/Button/Button"
+import Dialog from "./Dialog"
+import s from './Dialogs.module.scss'
+import { DialogPropsType } from "./DialogsContainer"
+import Message from "./Message"
 
 function Dialogs(props: DialogPropsType) {
 
-	const onAddMessage = () => {
-		props.addMessage()
-	}
+	const onAddMessage = () => props.addMessage()
 
-	const onNewMessageChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-		props.updateNewMessageBody(e.currentTarget.value)
-	}
+	const onNewMessageChange = (e: ChangeEvent<HTMLTextAreaElement>) => props.updateNewMessageBody(e.currentTarget.value)
 
 	return (
 		<div className={s.content}>

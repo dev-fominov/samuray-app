@@ -11,36 +11,79 @@ const instance = axios.create({
 
 export const usersAPI = {
 	getUsers(currentPage: number, pageSize: number) {
-		return instance.get<ResponseType>(`users?page=${currentPage}&count=${pageSize}`)
+		return instance.get<GetUsersType>(`users?page=${currentPage}&count=${pageSize}`)
+			.then(res => res.data)
 	},
 	follow(userId: number) {
-		return instance.post(`follow/${userId}`)
+		return instance.post<FollowUnfollowType>(`follow/${userId}`)
+			.then(res => res.data.resultCode)
 	},
 	unfollow(userId: number) {
-		return instance.delete(`follow/${userId}`)
+		return instance.delete<FollowUnfollowType>(`follow/${userId}`)
+			.then(res => res.data.resultCode)
 	}
 }
 
-export type ResponseType = {
-	error: string | null, 
-	items: UsersDataType[], 
+export const profileAPI = {
+	getProfile(userId: string) {
+		return instance.get<ProfileType>(`profile/` + userId)
+			.then(res => res.data)
+	},
+	getStatus(userId: string) {
+		return instance.get(`status/` + userId)
+	},
+	updateStatus(status: string) {
+		return instance.put(`status`, {status})
+	}
+}
+
+export const authAPI = {
+	getAuth() {
+		return instance.get<GetAuthType<{ id: number | null, email: string | null, login: string | null }>>(`auth/me`)
+			.then(res => res.data)
+	}
+}
+
+
+type GetAuthType<D = {}> = {
+	data: D
+	messages: Array<string>
+	fieldsErrors: Array<string>
+	resultCode: 0 | 1
+}
+
+export type GetUsersType = {
+	error: string | null
+	items: UsersDataType[]
 	totalCount: number
 }
 
-// export const getUsers = (currentPage:any, pageSize:any) => {
-// 	return instance.get(`users?page=${currentPage}&count=${pageSize}`, {
-// 		withCredentials: true
-// 	})
-// 	.then(response => {
-// 		return response.data
-// 	})
-// }
+export type FollowUnfollowType = {
+	resultCode: number
+}
 
-// export const getfollowed = (id:any) => {
-// 	return instance.get(`follow/${u.id}`, {
-// 		withCredentials: true
-// 	})
-// 	.then(response => {
-// 		return response.data
-// 	})
-// }
+export type ProfileType = {
+	aboutMe: string
+	contacts: ContactsType
+	lookingForAJob: boolean
+	lookingForAJobDescription: string
+	fullName: string
+	userId: number
+	photos: PhotosType
+}
+
+export type ContactsType = {
+	facebook: string
+	website: string | null
+	vk: string
+	twitter: string
+	instagram: string
+	youtube: string | null
+	github: string
+	mainLink: string | null
+}
+
+export type PhotosType = {
+	small: string
+	large: string
+}

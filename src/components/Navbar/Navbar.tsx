@@ -1,23 +1,27 @@
-import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink } from 'react-router-dom'
 import s from './Navbar.module.scss'
 
-const Navbar = () => {
+type isActiveType = {
+	isActive: boolean
+}
+
+export const Navbar = () => {
+
+	const itemActive = ({ isActive }: isActiveType): string => isActive ? `${s.active}` : ''
+
 	return (
 		<nav className={s.nav}>
 			<ul>
 				<li>
-					<NavLink to="/dialogs" activeClassName={s.active} >Dialogs</NavLink>
+					<NavLink to="/dialogs" className={itemActive} >Dialogs</NavLink>
 				</li>
 				<li>
-					<NavLink to="/profile" activeClassName={s.active} >Profile</NavLink>
+					<NavLink to="/profile" className={itemActive} >Profile</NavLink>
 				</li>
 				<li>
-					<NavLink to="/users" activeClassName={s.active} >Users</NavLink>
+					<NavLink to="/users" className={itemActive} >Users</NavLink>
 				</li>
 			</ul>
 		</nav>
 	)
 }
-
-export default Navbar;

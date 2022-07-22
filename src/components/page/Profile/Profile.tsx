@@ -1,8 +1,7 @@
-import React from "react";
+import { ProfileType } from "../../../api/api"
 
-import {MyPostsContainer} from "./MyPosts/MyPostContainer";
-import { ProfileType } from "./ProfileContainer";
-import ProfileInfo from "./ProfileInfo";
+import {MyPostsContainer} from "./MyPosts/MyPostContainer"
+import ProfileInfo from "./ProfileInfo"
 
 type PropsProfileType = {
 	profile: ProfileType | null
@@ -17,4 +16,4 @@ const Profile = (props: PropsProfileType) => {
 	)
 }
 
-export default Profile;
+export default Profile

@@ -3,7 +3,7 @@ import thunk, { ThunkAction, ThunkDispatch } from 'redux-thunk';
 import { authReducer, authReducerType } from './auth-reducer';
 
 import dialogReducer, { dialogReducerType } from "./dialog-reducer";
-import profileReducer, { profileReducerType } from "./profile-reducer";
+import { profileReducer, profileReducerType } from "./profile-reducer";
 import usersReducer, { usersReducerType } from './users-reducer';
 
 export const rootReducer = combineReducers({

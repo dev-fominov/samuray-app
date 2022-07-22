@@ -1,7 +1,8 @@
 import React from "react";
-import Preloader from "../../command/Preloader";
-import s from './Profile.module.scss';
-import { ProfileType } from "./ProfileContainer";
+import { ProfileType } from "../../../api/api";
+import Preloader from "../../command/Preloader"
+import s from './Profile.module.scss'
+import { ProfileStatus } from "./ProfileStatus";
 
 type ProfileInfoType = {
 	profile: ProfileType | null
@@ -11,6 +12,11 @@ function ProfileInfo(props: ProfileInfoType) {
 	if (!props.profile) {
 		return <Preloader />
 	}
+
+	const onChangeTitle = (newTitle: string) => {
+
+	}
+
 	return (
 
 	<div>
@@ -33,6 +39,7 @@ function ProfileInfo(props: ProfileInfoType) {
 					</ul>
 				</div>
 			</div>
+			<ProfileStatus title={'title'} onChange={onChangeTitle} />
 		</div>}
 	</div>
 

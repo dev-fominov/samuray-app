@@ -24,10 +24,10 @@ let initialState = {
 		{ id: v1(), message: 'message 4' },
 		{ id: v1(), message: 'message 5' }
 	] as MessagesDataType[],
-	newMessageText: ''
+	newMessageText: '' as string
 }
 
-export type initialStateType = typeof initialState
+
 
 const dialogReducer = (state: initialStateType = initialState, action: dialogReducerType): initialStateType => {
 
@@ -47,23 +47,18 @@ const dialogReducer = (state: initialStateType = initialState, action: dialogRed
 		}
 		default: return state;
 	}
-
 }
 
-export type dialogReducerType = changeNewMessageActionCreatorType | addMessageActionCreatorType
+export const changeNewMessageActionCreator = (newMessageText: string) =>
+	({ type: 'CHANGE-NEW-MESSAGE', payload: { newMessageText } } as const)
 
-type changeNewMessageActionCreatorType = ReturnType<typeof changeNewMessageActionCreator>
-export const changeNewMessageActionCreator = (newMessageText: string) => {
-	return {
-		type: 'CHANGE-NEW-MESSAGE',
-		payload: { newMessageText }
-	} as const
-}
-
-type addMessageActionCreatorType = ReturnType<typeof addMessageActionCreator>
-export const addMessageActionCreator = () => {
-	return { type: 'ADD-MESSAGE' } as const
-}
+export const addMessageActionCreator = () =>
+	({ type: 'ADD-MESSAGE' } as const)
 
 
-export default dialogReducer;
+export default dialogReducer
+
+export type dialogReducerType = ReturnType<typeof changeNewMessageActionCreator>
+	| ReturnType<typeof addMessageActionCreator>
+
+export type initialStateType = typeof initialState

@@ -1,7 +1,7 @@
 import { v1 } from 'uuid';
 import { StoreType } from '../Types';
 import dialogReducer from './dialog-reducer';
-import profileReducer from './profile-reducer';
+import {profileReducer} from './profile-reducer';
 
 const store: any = {
 	// _state: {

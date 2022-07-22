@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { followTC, setCurrentPage, setTotalUsersCount, toggleIsFetching, unfollowTC, setUsers, UsersDataType, toggleFollowingProgress, getUsersTC } from "../../../reducer/users-reducer";
+import { followTC, setCurrentPage, unfollowTC, UsersDataType, toggleFollowingProgress, getUsersTC } from "../../../reducer/users-reducer";
 import { AppStateType, RootState } from "../../../reducer/store";
 import Users from "./Users";
 import Preloader from "../../command/Preloader";
