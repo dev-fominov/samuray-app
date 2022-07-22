@@ -3,8 +3,8 @@
 
 import { connect } from "react-redux";
 import { Dispatch } from "redux";
-import { addMessageActionCreator, changeNewMessageActionCreator, initialStateType } from "../../../redux/dialog-reducer";
-import { AppStateType } from "../../../redux/redux-store";
+import { addMessageActionCreator, changeNewMessageActionCreator, initialStateType } from "../../../reducer/dialog-reducer";
+import { AppStateType } from "../../../reducer/store";
 import Dialogs from "./Dialogs";
 
 type mapStateToPropsType = {

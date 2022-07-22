@@ -1,5 +1,5 @@
-import { dialogReducerType } from "./redux/dialog-reducer"
-import { profileReducerType } from "./redux/profile-reducer"
+import { dialogReducerType } from "./reducer/dialog-reducer"
+import { profileReducerType } from "./reducer/profile-reducer"
 
 export type StoreType = {
 	_state: StateType

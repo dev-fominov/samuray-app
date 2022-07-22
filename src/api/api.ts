@@ -1,4 +1,5 @@
 import axios from "axios";
+import { UsersDataType } from "../reducer/users-reducer";
 
 const instance = axios.create({
 	withCredentials: true,
@@ -8,14 +9,32 @@ const instance = axios.create({
 	}
 })
 
-export const getUsers = (currentPage:any, pageSize:any) => {
-	return instance.get(`users?page=${currentPage}&count=${pageSize}`, {
-		withCredentials: true
-	})
-	.then(response => {
-		return response.data
-	})
+export const usersAPI = {
+	getUsers(currentPage: number, pageSize: number) {
+		return instance.get<ResponseType>(`users?page=${currentPage}&count=${pageSize}`)
+	},
+	follow(userId: number) {
+		return instance.post(`follow/${userId}`)
+	},
+	unfollow(userId: number) {
+		return instance.delete(`follow/${userId}`)
+	}
 }
+
+export type ResponseType = {
+	error: string | null, 
+	items: UsersDataType[], 
+	totalCount: number
+}
+
+// export const getUsers = (currentPage:any, pageSize:any) => {
+// 	return instance.get(`users?page=${currentPage}&count=${pageSize}`, {
+// 		withCredentials: true
+// 	})
+// 	.then(response => {
+// 		return response.data
+// 	})
+// }
 
 // export const getfollowed = (id:any) => {
 // 	return instance.get(`follow/${u.id}`, {
